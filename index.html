@@ -190,7 +190,7 @@
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             font-weight: 700;
             color: var(--accent);
         }
@@ -377,6 +377,16 @@
             }
         }
 
+        @media (max-width: 575.98px) {
+            .about-card {
+                padding: 1.4rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+        }
+
         /* ── Scroll reveal helper ── */
         .fade-in {
             opacity: 0;
@@ -452,33 +462,35 @@
                 <div class="col-lg-8">
                     <div class="about-card fade-in">
                         <p class="mb-3 text-theme-muted">
-                            I first learned to code the old-school way: by breaking things on my own,
-                            usually by accident, and figuring out how to make them work again.
-                            That build, break, fix loop taught me how to think like an engineer
-                            and turned curiosity into craft.
+                            I first learned to code the old-school way: break something, figure out why it broke,
+                            fix it, then move on until I broke the next thing.
                         </p>
                         <p class="mb-4 text-theme-muted">
-                            Every variable, function, class, and late-night debug session added up.
-                            Today, I bring that same mindset to GitHub, where I help developers and engineers
-                            build whatever they're trying to create. I still tinker constantly, and I'm
+                            That early learning was fueled by curiosity, trial and error, and a heck of a lot of coffee.
+                            Over time, every variable, function, class, and late-night debug session added up,
+                            and that build-break-fix loop taught me how to think like an engineer.
+                        </p>
+                        <p class="mb-4 text-theme-muted">
+                            Today, I bring that same mindset and passion to GitHub, where I help developers and engineers
+                            build whatever they're trying to create. I still tinker constantly and I'm
                             always reading, learning, and chasing what's next.
                         </p>
-                        <div class="row text-center g-4">
-                            <div class="col-4">
+                        <div class="row text-center g-3 g-sm-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="stat-number">2014</div>
-                                <div class="stat-label">Began Coding</div>
+                                <div class="stat-label">Started Coding</div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="stat-number">1000s+</div>
-                                <div class="stat-label">Lines of Code</div>
+                                <div class="stat-label">Lines of Code Pushed</div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-sm-4">
                                 <div class="stat-number">Countless</div>
-                                <div class="stat-label">Cups of Coffee</div>
+                                <div class="stat-label">Cups of Coffee Consumed</div>
                             </div>
                         </div>
                         <p class="text-center text-theme-soft mb-0 mt-4" style="font-size: 0.92rem;">
-                            Always learning. Always building.
+                            Always building. Always learning. Always growing.
                         </p>
                     </div>
                 </div>
@@ -616,7 +628,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6 fade-in">
-                    <a href="https://linkedin.com/in/alexsuglio" target="_blank" class="contact-link">
+                    <a href="https://linkedin.com/in/alexandersuglio" target="_blank" class="contact-link">
                         <i class="bi bi-linkedin"></i>
                         <span>Connect on LinkedIn</span>
                     </a>
@@ -628,7 +640,7 @@
     <!-- ─────────────────── FOOTER ─────────────────── -->
     <footer>
         <div class="container">
-            <span>© 2026 Alex Suglio — Built with ❤️ &amp; Bootstrap</span>
+            <span>© 2026 Alex Suglio — Built with ❤️, GitHub Copilot &amp; Bootstrap</span>
         </div>
     </footer>
 
