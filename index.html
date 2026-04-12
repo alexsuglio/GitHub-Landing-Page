@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex Suglio</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/copilot-96.svg">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -16,30 +17,65 @@
             --accent: #4f8ef7;
             --dark: #0f172a;
             --card-bg: #1e293b;
+            --bg-main: #0f172a;
+            --bg-alt: #0b1120;
+            --bg-hero-start: #0f172a;
+            --bg-hero-end: #1e3a5f;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-soft: #64748b;
+            --text-heading: #f1f5f9;
+            --text-inverse: #ffffff;
+            --border-soft: rgba(255, 255, 255, 0.07);
+            --border-ui: rgba(255, 255, 255, 0.06);
+            --nav-bg: rgba(15, 23, 42, 0.92);
+            --footer-text: #475569;
+            --hero-shadow: rgba(79, 142, 247, 0.35);
+            --card-shadow: rgba(0, 0, 0, 0.4);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark);
-            color: #e2e8f0;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        body[data-theme="light"] {
+            --accent: #2f6feb;
+            --bg-main: #f6f8fa;
+            --bg-alt: #eef3f8;
+            --bg-hero-start: #ffffff;
+            --bg-hero-end: #eaf2ff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --text-soft: #64748b;
+            --text-heading: #0f172a;
+            --text-inverse: #ffffff;
+            --card-bg: #ffffff;
+            --border-soft: rgba(15, 23, 42, 0.12);
+            --border-ui: rgba(15, 23, 42, 0.12);
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --footer-text: #64748b;
+            --hero-shadow: rgba(47, 111, 235, 0.2);
+            --card-shadow: rgba(15, 23, 42, 0.08);
         }
 
         /* ── Navbar ── */
         .navbar {
-            background-color: rgba(15, 23, 42, 0.92);
+            background-color: var(--nav-bg);
             backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid var(--border-ui);
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.3rem;
-            color: #fff !important;
+            color: var(--text-heading) !important;
             letter-spacing: 0.5px;
         }
 
         .nav-link {
-            color: #94a3b8 !important;
+            color: var(--text-muted) !important;
             font-weight: 500;
             transition: color 0.2s;
         }
@@ -51,7 +87,7 @@
         /* ── Hero ── */
         #hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--bg-hero-start) 0%, var(--bg-hero-end) 100%);
             display: flex;
             align-items: center;
         }
@@ -62,7 +98,7 @@
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid var(--accent);
-            box-shadow: 0 0 40px rgba(79, 142, 247, 0.35);
+            box-shadow: 0 0 40px var(--hero-shadow);
         }
 
         .hero-badge {
@@ -82,12 +118,12 @@
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 700;
             line-height: 1.15;
-            color: #fff;
+            color: var(--text-heading);
         }
 
         .hero-subtitle {
             font-size: 1.15rem;
-            color: #94a3b8;
+            color: var(--text-muted);
             max-width: 500px;
         }
 
@@ -110,7 +146,7 @@
         .btn-outline-custom {
             background: transparent;
             border: 1.5px solid #475569;
-            color: #cbd5e1;
+            color: var(--text-main);
             font-weight: 600;
             padding: 0.65rem 1.8rem;
             border-radius: 8px;
@@ -138,17 +174,17 @@
         .section-title {
             font-size: clamp(1.8rem, 3.5vw, 2.4rem);
             font-weight: 700;
-            color: #f1f5f9;
+            color: var(--text-heading);
         }
 
         /* ── About ── */
         #about {
-            background-color: var(--dark);
+            background-color: var(--bg-main);
         }
 
         .about-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid var(--border-soft);
             border-radius: 16px;
             padding: 2rem;
         }
@@ -161,26 +197,27 @@
 
         .stat-label {
             font-size: 0.85rem;
-            color: #64748b;
+            color: var(--text-soft);
         }
 
-        /* ── Skills ── */
-        #skills {
-            background-color: #0b1120;
+        /* ── Interests ── */
+        #interests {
+            background-color: var(--bg-alt);
         }
 
         .skill-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid var(--border-soft);
             border-radius: 14px;
             padding: 1.8rem 1.5rem;
             text-align: center;
             transition: transform 0.25s, box-shadow 0.25s;
+            height: 100%;
         }
 
         .skill-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 30px var(--card-shadow);
         }
 
         .skill-icon {
@@ -190,25 +227,35 @@
         }
 
         .skill-card h5 {
-            color: #f1f5f9;
+            color: var(--text-heading);
             font-weight: 600;
             margin-bottom: 0.4rem;
         }
 
         .skill-card p {
             font-size: 0.88rem;
-            color: #64748b;
+            color: var(--text-soft);
             margin: 0;
+            line-height: 1.65;
+        }
+
+        .skill-stack {
+            display: block;
+            margin-top: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
 
         /* ── Projects ── */
         #projects {
-            background-color: var(--dark);
+            background-color: var(--bg-main);
         }
 
         .project-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid var(--border-soft);
             border-radius: 14px;
             padding: 1.8rem;
             height: 100%;
@@ -216,12 +263,13 @@
         }
 
         .project-card:hover {
-            border-color: rgba(79,142,247,0.5);
+            border-color: rgba(79, 142, 247, 0.5);
+            box-shadow: 0 8px 24px var(--card-shadow);
         }
 
         .project-tag {
             display: inline-block;
-            background: rgba(79,142,247,0.12);
+            background: rgba(79, 142, 247, 0.12);
             color: var(--accent);
             border-radius: 4px;
             font-size: 0.75rem;
@@ -231,9 +279,29 @@
             margin-bottom: 4px;
         }
 
+        .project-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+        }
+
+        .project-link h5 {
+            color: var(--text-heading);
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s ease, text-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .project-link:hover h5 {
+            color: var(--accent);
+            text-shadow: 0 0 16px rgba(79, 142, 247, 0.35);
+            transform: translateX(3px);
+        }
+
         /* ── Contact ── */
         #contact {
-            background-color: #0b1120;
+            background-color: var(--bg-alt);
         }
 
         .contact-link {
@@ -241,10 +309,10 @@
             align-items: center;
             gap: 12px;
             background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.07);
+            border: 1px solid var(--border-soft);
             border-radius: 12px;
             padding: 1rem 1.4rem;
-            color: #cbd5e1;
+            color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
             transition: border-color 0.2s, color 0.2s;
@@ -261,12 +329,52 @@
 
         /* ── Footer ── */
         footer {
-            background-color: var(--dark);
-            border-top: 1px solid rgba(255,255,255,0.06);
+            background-color: var(--bg-main);
+            border-top: 1px solid var(--border-ui);
             padding: 24px 0;
             text-align: center;
-            color: #475569;
+            color: var(--footer-text);
             font-size: 0.875rem;
+        }
+
+        .navbar-toggler-icon-theme {
+            color: var(--text-heading);
+        }
+
+        .text-theme-muted {
+            color: var(--text-muted) !important;
+            line-height: 1.8;
+        }
+
+        .text-theme-soft {
+            color: var(--text-soft) !important;
+        }
+
+        .theme-toggle {
+            border: 1px solid var(--border-soft);
+            background: transparent;
+            color: var(--text-main);
+            border-radius: 999px;
+            padding: 0.35rem 0.85rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .theme-toggle-wrap {
+            margin-left: 1rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .theme-toggle-wrap {
+                margin-left: 0;
+                margin-top: 0.8rem;
+            }
         }
 
         /* ── Scroll reveal helper ── */
@@ -290,15 +398,19 @@
         <div class="container">
             <a class="navbar-brand" href="#">Alex Suglio</a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <i class="bi bi-list text-white fs-4"></i>
+                <i class="bi bi-list fs-4 navbar-toggler-icon-theme"></i>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto gap-lg-2">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#interests">Interests</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
+                <div class="theme-toggle-wrap">
+                    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme">Light
+                        mode</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -308,25 +420,22 @@
         <div class="container">
             <div class="row align-items-center gy-5">
                 <div class="col-lg-7 order-lg-1 order-2">
-                    <div class="hero-badge">👋 Welcome to my corner of the web</div>
+                    <div class="hero-badge">👋 Welcome to my little corner of the web</div>
                     <h1 class="hero-title mb-3">
-                        Hi, I'm <span style="color: var(--accent);">Alex Suglio</span>
+                        Hi, I'm <span style="color: var(--accent);">Alex!</span>
                     </h1>
                     <p class="hero-subtitle mb-4">
-                        Developer &amp; builder. I love turning ideas into clean, 
+                        Developer &amp; builder. I love turning ideas into clean,
                         functional products — one commit at a time.
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="#projects" class="btn btn-primary-custom">View My Work</a>
+                        <a href="#projects" class="btn btn-primary-custom">View My Stuff</a>
                         <a href="#contact" class="btn btn-outline-custom">Get In Touch</a>
                     </div>
                 </div>
                 <div class="col-lg-5 order-lg-2 order-1 text-center">
-                    <img
-                        src="https://github.com/user-attachments/assets/dcf57cea-580d-4201-806a-48379448980c"
-                        alt="Alex Suglio"
-                        class="hero-photo"
-                    >
+                    <img src="https://github.com/user-attachments/assets/dcf57cea-580d-4201-806a-48379448980c"
+                        alt="Alex Suglio" class="hero-photo">
                 </div>
             </div>
         </div>
@@ -342,81 +451,91 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="about-card fade-in">
-                        <p class="mb-4" style="color: #94a3b8; line-height: 1.8;">
-                            I'm a passionate developer who enjoys crafting solutions to real-world problems. 
-                            Whether it's building out a full-stack web app or tinkering with a side project, 
-                            I bring curiosity and attention to detail to everything I do.
-                            I'm always looking to grow my skill set, collaborate with great people, 
-                            and ship work I'm proud of.
+                        <p class="mb-3 text-theme-muted">
+                            I first learned to code the old-school way: by breaking things on my own,
+                            usually by accident, and figuring out how to make them work again.
+                            That build, break, fix loop taught me how to think like an engineer
+                            and turned curiosity into craft.
+                        </p>
+                        <p class="mb-4 text-theme-muted">
+                            Every variable, function, class, and late-night debug session added up.
+                            Today, I bring that same mindset to GitHub, where I help developers and engineers
+                            build whatever they're trying to create. I still tinker constantly, and I'm
+                            always reading, learning, and chasing what's next.
                         </p>
                         <div class="row text-center g-4">
                             <div class="col-4">
-                                <div class="stat-number">10+</div>
-                                <div class="stat-label">Projects Built</div>
+                                <div class="stat-number">2014</div>
+                                <div class="stat-label">Began Coding</div>
                             </div>
                             <div class="col-4">
-                                <div class="stat-number">3+</div>
-                                <div class="stat-label">Years Coding</div>
+                                <div class="stat-number">1000s+</div>
+                                <div class="stat-label">Lines of Code</div>
                             </div>
                             <div class="col-4">
-                                <div class="stat-number">∞</div>
+                                <div class="stat-number">Countless</div>
                                 <div class="stat-label">Cups of Coffee</div>
                             </div>
                         </div>
+                        <p class="text-center text-theme-soft mb-0 mt-4" style="font-size: 0.92rem;">
+                            Always learning. Always building.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ─────────────────── SKILLS ─────────────────── -->
-    <section id="skills">
+    <!-- ─────────────────── INTERESTS  ─────────────────── -->
+    <section id="interests">
         <div class="container">
             <div class="text-center mb-5 fade-in">
-                <div class="section-label">Skills</div>
-                <h2 class="section-title mt-1">What I work with</h2>
+                <div class="section-label">Interests</div>
+                <h2 class="section-title mt-1">What I like building and exploring</h2>
             </div>
             <div class="row g-4 justify-content-center">
-                <div class="col-6 col-md-4 col-lg-2 fade-in">
+                <div class="col-md-6 col-lg-3 fade-in">
                     <div class="skill-card">
                         <div class="skill-icon"><i class="bi bi-code-slash"></i></div>
-                        <h5>HTML &amp; CSS</h5>
-                        <p>Semantic markup &amp; responsive design</p>
+                        <h5>Front-End Development</h5>
+                        <p>
+                            I enjoy building interfaces that feel clean, fast, and easy to use.
+                            I like the details just as much as the functionality.
+                            <span class="skill-stack">HTML, CSS, Bootstrap, JavaScript</span>
+                        </p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-in">
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="bi bi-filetype-js"></i></div>
-                        <h5>JavaScript</h5>
-                        <p>Modern ES6+ &amp; DOM manipulation</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-in">
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="bi bi-git"></i></div>
-                        <h5>Git &amp; GitHub</h5>
-                        <p>Version control &amp; collaboration</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-in">
-                    <div class="skill-card">
-                        <div class="skill-icon"><i class="bi bi-bootstrap"></i></div>
-                        <h5>Bootstrap</h5>
-                        <p>Rapid UI development</p>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-in">
+                <div class="col-md-6 col-lg-3 fade-in">
                     <div class="skill-card">
                         <div class="skill-icon"><i class="bi bi-server"></i></div>
-                        <h5>Back-End</h5>
-                        <p>APIs, databases &amp; server logic</p>
+                        <h5>Back-End Development</h5>
+                        <p>
+                            I like connecting the moving pieces behind the scenes, from APIs to tooling,
+                            and making the whole workflow feel solid end to end.
+                            <span class="skill-stack">APIs, Node.js, npm, Python, pip</span>
+                        </p>
                     </div>
                 </div>
-                <div class="col-6 col-md-4 col-lg-2 fade-in">
+                <div class="col-md-6 col-lg-3 fade-in">
                     <div class="skill-card">
-                        <div class="skill-icon"><i class="bi bi-phone"></i></div>
-                        <h5>Responsive</h5>
-                        <p>Mobile-first, any device</p>
+                        <div class="skill-icon"><i class="bi bi-cpu"></i></div>
+                        <h5>Machine Learning</h5>
+                        <p>
+                            A lot of my tinkering lately lives here. I like exploring LLMs,
+                            testing ideas quickly, and learning by building small experiments.
+                            <span class="skill-stack">LLMs, Python, Jupyter, Google Colab</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in">
+                    <div class="skill-card">
+                        <div class="skill-icon"><i class="bi bi-cloud"></i></div>
+                        <h5>Platform, Cloud &amp; Delivery</h5>
+                        <p>
+                            I'm interested in the systems around software too: infrastructure,
+                            CI/CD, and the full SDLC that helps good ideas make it to production.
+                            <span class="skill-stack">Cloud infrastructure, CI/CD, SDLC, GitHub workflows</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -428,39 +547,47 @@
         <div class="container">
             <div class="text-center mb-5 fade-in">
                 <div class="section-label">Projects</div>
-                <h2 class="section-title mt-1">Things I've built</h2>
+                <h2 class="section-title mt-1">
+                    Things I've built with GitHub Copilot
+                </h2>
             </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4 fade-in">
-                    <div class="project-card">
-                        <h5 class="text-white fw-600 mb-2">firstRepo</h5>
-                        <p style="color:#64748b; font-size:0.9rem;" class="mb-3">
-                            My very first GitHub repository — where every developer's journey begins. 
-                            Ground zero for learning the ropes of version control.
-                        </p>
-                        <div>
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">GitHub</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 fade-in">
-                    <div class="project-card d-flex align-items-center justify-content-center" style="min-height: 180px;">
-                        <div class="text-center" style="color:#334155;">
-                            <i class="bi bi-plus-circle fs-2 mb-2 d-block"></i>
-                            <span style="font-size:0.9rem;">More projects coming soon</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 fade-in">
-                    <div class="project-card d-flex align-items-center justify-content-center" style="min-height: 180px;">
-                        <div class="text-center" style="color:#334155;">
-                            <i class="bi bi-plus-circle fs-2 mb-2 d-block"></i>
-                            <span style="font-size:0.9rem;">More projects coming soon</span>
-                        </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4 fade-in">
+                <div class="project-card">
+                    <a href="https://github.com/alexsuglio/GitHub-Landing-Page" target="_blank" class="project-link">
+                        <h5>GitHub Landing Page</h5>
+                    </a>
+                    <p class="mb-3 text-theme-soft" style="font-size:0.9rem;">
+                        You're looking at it! (Pretty meta, right?) I built this site with GitHub Copilot to sharpen
+                        my HTML, CSS, and Bootstrap skills, and to see how AI can help ship polished, responsive pages
+                        faster.
+                    </p>
+                    <div>
+                        <span class="project-tag">HTML</span>
+                        <span class="project-tag">CSS</span>
+                        <span class="project-tag">Bootstrap</span>
+                        <span class="project-tag">GitHub</span>
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-lg-4 fade-in">
+                <div class="project-card d-flex align-items-center justify-content-center" style="min-height: 180px;">
+                    <div class="text-center text-theme-soft">
+                        <i class="bi bi-plus-circle fs-2 mb-2 d-block"></i>
+                        <span style="font-size:0.9rem;">More projects coming soon</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 fade-in">
+                <div class="project-card d-flex align-items-center justify-content-center" style="min-height: 180px;">
+                    <div class="text-center text-theme-soft">
+                        <i class="bi bi-plus-circle fs-2 mb-2 d-block"></i>
+                        <span style="font-size:0.9rem;">More projects coming soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -470,8 +597,8 @@
             <div class="text-center mb-5 fade-in">
                 <div class="section-label">Contact</div>
                 <h2 class="section-title mt-1">Let's connect</h2>
-                <p style="color:#64748b; max-width:480px; margin:0.75rem auto 0;">
-                    Have a project in mind or just want to say hi? 
+                <p class="text-theme-soft" style="max-width:480px; margin:0.75rem auto 0;">
+                    Have a project in mind or just want to say hi?
                     Reach out through any of the links below.
                 </p>
             </div>
@@ -483,13 +610,13 @@
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6 fade-in">
-                    <a href="mailto:hello@example.com" class="contact-link">
+                    <a href="mailto:alexsuglio@github.com" class="contact-link">
                         <i class="bi bi-envelope"></i>
                         <span>Send me an email</span>
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6 fade-in">
-                    <a href="https://linkedin.com" target="_blank" class="contact-link">
+                    <a href="https://linkedin.com/in/alexsuglio" target="_blank" class="contact-link">
                         <i class="bi bi-linkedin"></i>
                         <span>Connect on LinkedIn</span>
                     </a>
@@ -509,6 +636,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Scroll fade-in -->
     <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        const initialTheme = savedTheme || 'dark';
+
+        const updateTheme = (theme) => {
+            document.body.setAttribute('data-theme', theme);
+            themeToggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+            localStorage.setItem('theme', theme);
+        };
+
+        updateTheme(initialTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            updateTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
