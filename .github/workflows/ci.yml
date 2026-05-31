@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  basic-checks:
+    name: Basic checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show repo context
+        run: |
+          echo "Actor:  $GITHUB_ACTOR"
+          echo "Event:  $GITHUB_EVENT_NAME"
+          echo "Ref:    $GITHUB_REF"
+          echo "SHA:    $GITHUB_SHA"
+          echo "Runner: $RUNNER_OS"
+
+      - name: List files (top level)
+        run: |
+          ls -la
+
+      - name: Validate HTML (if any .html files exist)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if ! ls **/*.html >/dev/null 2>&1; then
+            echo "No HTML files found; skipping."
+            exit 0
+          fi
+
+          sudo apt-get update
+          sudo apt-get install -y tidy
+
+          failures=0
+          while IFS= read -r -d '' file; do
+            echo "Checking: $file"
+            if ! tidy -e -q -utf8 "$file" >/dev/null; then
+              failures=$((failures + 1))
+            fi
+          done < <(find . -name "*.html" -type f -print0)
+
+          if [ "$failures" -gt 0 ]; then
+            echo "HTML validation failed in $failures file(s)."
+            exit 1
+          fi
+
+          echo "HTML validation passed."
