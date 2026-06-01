@@ -1,0 +1,181 @@
+name: Agentic Audit (no-LLM)
+
+on:
+  workflow_dispatch:
+    inputs:
+      goal:
+        description: "What should the agent try to accomplish?"
+        required: true
+        default: "Audit the landing page repo and produce a prioritized report."
+      strict_html:
+        description: "Fail the run if HTML validation has warnings/errors"
+        type: boolean
+        required: true
+        default: true
+
+env:
+  # Opt in early so JS actions run on Node 24 (per the warning you saw)
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    name: Audit + Plan + Report
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: (1) Collect context
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "GOAL: ${{ inputs.goal }}"
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Ref:   $GITHUB_REF"
+          echo "SHA:   $GITHUB_SHA"
+          echo ""
+          echo "Top-level files:"
+          ls -la
+
+          echo ""
+          echo "Repo file counts:"
+          echo "  HTML: $(find . -name '*.html' -type f | wc -l)"
+          echo "  CSS:  $(find . -name '*.css'  -type f | wc -l)"
+          echo "  JS:   $(find . -name '*.js'   -type f | wc -l)"
+
+      - name: (2) Generate plan (deterministic "agent" plan)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          cat > agent-plan.md <<'EOF'
+          # Agent Plan (no-LLM)
+
+          ## Goal
+          EOF
+          echo "${{ inputs.goal }}" >> agent-plan.md
+
+          cat >> agent-plan.md <<'EOF'
+
+          ## Plan
+          1. Identify key site entry points (HTML files).
+          2. Validate HTML for obvious structural problems.
+          3. Scan HTML for links and flag anything that looks suspicious (empty hrefs, http links, mailto, etc.).
+          4. Produce a short prioritized report with suggested next steps.
+
+          ## Notes
+          - This is a no-LLM workflow: the "plan" is a fixed template.
+          - Later, we can replace this step with an LLM call to generate a customized plan.
+          EOF
+
+          echo "=== agent-plan.md ==="
+          cat agent-plan.md
+
+      - name: (3) Execute checks - HTML validation
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sudo apt-get update
+          sudo apt-get install -y tidy
+
+          html_files=$(find . -name "*.html" -type f || true)
+          if [ -z "$html_files" ]; then
+            echo "No HTML files found; skipping tidy."
+            exit 0
+          fi
+
+          failures=0
+          while IFS= read -r file; do
+            echo "Checking: $file"
+            # tidy exit codes: 0 ok, 1 ok w/ warnings?, 2 errors (varies by build)
+            # We'll enforce strict mode via input.
+            if tidy -e -q -utf8 "$file" >/dev/null; then
+              true
+            else
+              if [ "${{ inputs.strict_html }}" = "true" ]; then
+                failures=$((failures + 1))
+              fi
+            fi
+          done <<< "$html_files"
+
+          if [ "$failures" -gt 0 ]; then
+            echo "Strict HTML validation failed in $failures file(s)."
+            exit 1
+          fi
+
+          echo "HTML validation complete."
+
+      - name: (4) Execute checks - simple link scan
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Very simple heuristics, not a full crawler.
+          # Produces a findings file we’ll include in the report.
+          > link-findings.txt
+
+          while IFS= read -r file; do
+            echo "Scanning links in: $file"
+            # empty href=""
+            grep -nE 'href=""' "$file" >> link-findings.txt || true
+            # href="#" (often placeholder)
+            grep -nE 'href="#[^"]*"' "$file" >> link-findings.txt || true
+            # http links (prefer https)
+            grep -nE 'href="http://[^"]+"' "$file" >> link-findings.txt || true
+          done < <(find . -name "*.html" -type f)
+
+          echo "=== link-findings.txt ==="
+          if [ -s link-findings.txt ]; then
+            cat link-findings.txt
+          else
+            echo "No link findings."
+          fi
+
+      - name: (5) Produce agent report (markdown)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          {
+            echo "# Agent Report"
+            echo ""
+            echo "## Goal"
+            echo "${{ inputs.goal }}"
+            echo ""
+            echo "## Plan"
+            # include plan without re-printing markdown header duplication too much
+            sed -n '1,120p' agent-plan.md
+            echo ""
+            echo "## Findings"
+            echo ""
+            echo "### Link scan (heuristics)"
+            if [ -s link-findings.txt ]; then
+              echo ""
+              echo '```'
+              cat link-findings.txt
+              echo '```'
+            else
+              echo "- No suspicious link patterns found by heuristics."
+            fi
+            echo ""
+            echo "## Suggested next steps"
+            echo "- If you want a real agent later: replace the plan step with an LLM call and feed it repo context + findings."
+            echo "- Add a true link checker (crawl + HTTP status codes) and an accessibility checker."
+          } > agent-report.md
+
+          echo "=== agent-report.md ==="
+          cat agent-report.md
+
+      - name: (6) Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-report
+          path: |
+            agent-report.md
+            agent-plan.md
+            link-findings.txt
