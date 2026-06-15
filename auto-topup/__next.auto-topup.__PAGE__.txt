@@ -1,0 +1,9 @@
+1:"$Sreact.fragment"
+2:I[47257,["/GitHub-Landing-Page/_next/static/chunks/14pa31ko2q.bi.js","/GitHub-Landing-Page/_next/static/chunks/0n4z.7yu76je-.js","/GitHub-Landing-Page/_next/static/chunks/0_gor93a1j6je.js"],"ClientPageRoot"]
+3:I[71049,["/GitHub-Landing-Page/_next/static/chunks/14pa31ko2q.bi.js","/GitHub-Landing-Page/_next/static/chunks/0n4z.7yu76je-.js","/GitHub-Landing-Page/_next/static/chunks/0_gor93a1j6je.js","/GitHub-Landing-Page/_next/static/chunks/05v8nqw2busvu.js","/GitHub-Landing-Page/_next/static/chunks/0qsyj8lau2ose.js","/GitHub-Landing-Page/_next/static/chunks/0909_218zl2n2.js"],"default"]
+6:I[97367,["/GitHub-Landing-Page/_next/static/chunks/14pa31ko2q.bi.js","/GitHub-Landing-Page/_next/static/chunks/0n4z.7yu76je-.js","/GitHub-Landing-Page/_next/static/chunks/0_gor93a1j6je.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/GitHub-Landing-Page/_next/static/chunks/05v8nqw2busvu.js","async":true}],["$","script","script-1",{"src":"/GitHub-Landing-Page/_next/static/chunks/0qsyj8lau2ose.js","async":true}],["$","script","script-2",{"src":"/GitHub-Landing-Page/_next/static/chunks/0909_218zl2n2.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"4s5hvu29dVjIG9JxSwa2C"}
+4:{}
+5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
+8:null
